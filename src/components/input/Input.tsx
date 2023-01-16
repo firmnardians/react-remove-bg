@@ -1,7 +1,7 @@
 import React from 'react';
 
 type InputProps = {
-	resultImage: (file: object) => void;
+	resultImage: (file: Blob) => void;
 };
 
 export default function Input({ resultImage }: InputProps) {
@@ -19,8 +19,8 @@ export default function Input({ resultImage }: InputProps) {
 	return (
 		<div className='py-4'>
 			<label className='custom-file btn btn-primary btn-lg px-5' htmlFor='inputFile'>
-				<input type='file' id='inputFile' onChange={(event) => validateFile(event)} />
-				Upload Image
+				<input accept='image/png, image/jpeg' type='file' id='inputFile' onChange={(event) => validateFile(event)} />
+				<p className='m-0 fw-bold'>Upload Image</p>
 			</label>
 
 			<div className='mt-4'>

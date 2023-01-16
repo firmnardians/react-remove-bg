@@ -21,3 +21,17 @@ code {
 .custom-file input[type='file'] {
 	display: none;
 }
+
+.img-result {
+	width: 300px;
+	height: auto;
+}
+
+.img-result img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.card-custom {
+	min-height: 300px;
+}
