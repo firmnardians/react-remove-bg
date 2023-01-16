@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Title from './components/title/Title';
+import Input from './components/input/Input';
+import Card from './components/card/Card';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	function handleRemoveBg(result: object) {
+		console.log(result);
+	}
+
+	return (
+		<div className='container'>
+			<Title title='Remove Image Background' description='Get a transparent background for any image.' />
+
+			<Card>
+				<div className='px-4'>
+					<Input resultImage={(result) => handleRemoveBg(result)} />
+				</div>
+			</Card>
+
+			<div className='mt-4 d-flex align-items-center justify-content-center mt-5'>
+				<p>@firmnardians</p>
+			</div>
+		</div>
+	);
 }
 
 export default App;
