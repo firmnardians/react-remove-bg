@@ -62,7 +62,7 @@ function App() {
 					<img id='resultImage' alt='Remove Background' className='img-result img-fluid shadow-lg mx-auto d-block' />
 
 					<a href='/#' id='download' className='mt-5'>
-						<button className='btn btn-primary btn-md px-5 fw-bold'>Download</button>
+						<button className='btn btn-primary btn-md px-5 fw-bold'>Download Image</button>
 					</a>
 				</div>
 			) : (
