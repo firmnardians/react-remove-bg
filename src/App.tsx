@@ -28,6 +28,8 @@ function App() {
 
 			if (response.status === 200) {
 				setRemoveSuccess(true);
+			} else if (response.status === 402) {
+				alert('API ini kena limit, hanya bisa request sebanyak 50 kali dalam sebulan.');
 			} else {
 				setRemoveSuccess(false);
 			}
