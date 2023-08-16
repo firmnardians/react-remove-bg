@@ -86,7 +86,7 @@ function App() {
 			)}
 
 			<div className='mt-4 d-flex align-items-center justify-content-center mt-5'>
-				<a target='_blank' href='https://firmnardians.vercel.app' rel='noreferrer'>
+				<a target='_blank' href='https://1998s.dev' rel='noreferrer'>
 					<p className='fw-bold'>🔥firmnardians🔥</p>
 				</a>
 			</div>
