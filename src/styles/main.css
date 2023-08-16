@@ -35,3 +35,11 @@ code {
 .card-custom {
 	min-height: 300px;
 }
+
+@media only screen and (max-width: 600px) {
+	.card-custom {
+		min-height: 100%;
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+	}
+}
