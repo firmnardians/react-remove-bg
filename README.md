@@ -4,4 +4,4 @@ Get a transparent background for any image.
 
 ## Demo
 
-https://remove-img-bg.netlify.app
+https://rmbg.1998s.dev
