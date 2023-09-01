@@ -6,8 +6,8 @@ type TitleProps = {
 export default function Title({ title, description }: TitleProps) {
 	return (
 		<div className='pt-5'>
-			<h1 className='text-center fw-bold'>{title}</h1>
-			<h5 className='text-muted text-center'>{description}</h5>
+			<h2 className='text-center fw-bold'>{title}</h2>
+			<h6 className='text-muted text-center'>{description}</h6>
 		</div>
 	);
 }

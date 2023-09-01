@@ -9,7 +9,7 @@ let blob = null;
 function App() {
 	const [isRemoveSuccess, setRemoveSuccess] = useState(false);
 	const [isLoading, setLoading] = useState(false);
-	const [idDropped, setDropped] = useState(false);
+	const [isDropped, setDropped] = useState(false);
 
 	async function handleRemoveBg(result: Blob) {
 		setLoading(true);
@@ -20,21 +20,17 @@ function App() {
 
 			const response = await fetch(process.env.REACT_APP_API as string, {
 				method: 'POST',
-				headers: {
-					'X-Api-Key': process.env.REACT_APP_KEY as string,
-				},
+				headers: { 'X-Api-Key': process.env.REACT_APP_KEY as string },
 				body: form,
 			});
 
-			if (response.status === 200) {
+			if (response?.status === 402) return alert('API ini kena limit, hanya bisa request sebanyak 50 kali dalam sebulan.');
+
+			if (response?.status === 200) {
 				setRemoveSuccess(true);
-			} else if (response.status === 402) {
-				alert('API ini kena limit, hanya bisa request sebanyak 50 kali dalam sebulan.');
 			} else {
 				setRemoveSuccess(false);
 			}
-
-			setLoading(false);
 
 			const outputBlob = await response.blob();
 
@@ -42,22 +38,22 @@ function App() {
 			const image = document.getElementById('resultImage') as HTMLImageElement | null;
 			const down = document.getElementById('download') as HTMLAnchorElement | null;
 
-			if (image !== null) {
-				image.src = blob;
-			}
+			if (image !== null) image.src = blob;
 
 			if (down !== null) {
 				down.href = blob;
 				down.download = `${+new Date()}.png`;
 			}
 		} catch (err) {
+			alert(`Error: ${err}`);
+		} finally {
 			setLoading(false);
 		}
 	}
 
 	return (
 		<div className='container'>
-			<Title title='Remove Image Background' description='Get a transparent background for any image.' />
+			<Title title='React Remove Background' description='Get a transparent background for any image.' />
 
 			{isRemoveSuccess ? (
 				<div className='d-flex flex-column align-items-center justify-content-center mt-5'>
@@ -73,9 +69,9 @@ function App() {
 						<Spinner />
 					) : (
 						<div className='px-4'>
-							{idDropped ? (
-								<div className='px-4'>
-									<h5 className='fw-bold'>DROP IMAGE IN HERE</h5>
+							{isDropped ? (
+								<div className='px-md-4'>
+									<h5 className='fw-bold text-center'>DROP IMAGE IN HERE</h5>
 								</div>
 							) : (
 								<Input resultImage={(result) => handleRemoveBg(result)} />

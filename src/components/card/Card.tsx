@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 type ChildrenProps = {
 	children: React.ReactNode;
@@ -6,33 +6,28 @@ type ChildrenProps = {
 	setDropped: (data: boolean) => void;
 };
 
-export default function Card({ children, resultImage, setDropped }: ChildrenProps) {
-	function dragOverHandler(event: any) {
-		// Prevent default behavior (Prevent file from being opened)
+function __Card({ children, resultImage, setDropped }: ChildrenProps) {
+	function dragOverHandler(event: React.DragEvent<HTMLDivElement>) {
 		event.preventDefault();
-
 		setDropped(true);
 	}
 
-	function dropHandler(ev: any) {
-		// Prevent default behavior (Prevent file from being opened)
-		ev.preventDefault();
+	function dropHandler(event: React.DragEvent<HTMLDivElement>) {
+		event.preventDefault();
 
-		if (ev.dataTransfer.items) {
-			// Use DataTransferItemList interface to access the file(s)
-			[...ev.dataTransfer.items].forEach((item, i) => {
-				// If dropped items aren't files, reject them
-				if (item.kind === 'file') {
+		let arr: any[] = [];
+
+		if (event.dataTransfer.items) {
+			arr.concat(event.dataTransfer.items);
+			arr.forEach((item: any, i: any) => {
+				if (item?.kind === 'file') {
 					const file = item.getAsFile();
-
 					resultImage(file);
 				}
 			});
 		} else {
-			// Use DataTransfer interface to access the file(s)
-			[...ev.dataTransfer.files].forEach((file, i) => {
-				resultImage(file);
-			});
+			arr.concat(event.dataTransfer.items);
+			arr.forEach((file: any, i: any) => resultImage(file));
 		}
 	}
 
@@ -46,3 +41,6 @@ export default function Card({ children, resultImage, setDropped }: ChildrenProp
 		</div>
 	);
 }
+
+const Card = memo(__Card);
+export default Card;
